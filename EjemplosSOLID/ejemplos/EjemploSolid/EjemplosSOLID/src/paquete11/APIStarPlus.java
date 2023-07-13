@@ -6,14 +6,14 @@
 package paquete11;
 
 
-public class APIAmazonMovie implements APIMovie{
+public class APIStarPlus implements APIMovie{
     
     private String apiKey;
     private int nroRandom = (int) (Math.random() * 999999+100000);
     
     @Override
     public void establecerApiKey(String ak){
-        apiKey = "AMAZON"+ak+nroRandom;
+        apiKey = "STARPLUS"+ak+nroRandom;
     }
     
     @Override

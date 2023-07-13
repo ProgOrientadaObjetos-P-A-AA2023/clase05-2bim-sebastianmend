@@ -1,37 +1,27 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package paquete11;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Scanner;
-
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Scanner;
 
-import paquete11.*;
-
-/**
- *
- * @author SALA H
- */
 public class LecturaArc {
-     private Scanner entrada;
+
+    private Scanner entrada;
     private String nombreArchivo;
     private String rutaArchivo;
-    private ArrayList<String> lista;
+    private ArrayList<Usuario> lista;
 
-    public ArchivoLectura(String n) {
+    public LecturaArc (String n) {
         nombreArchivo = n;
-        rutaArchivo = String.format("data/%s", nombreArchivo);
-        // data/profesores.txt
-        File f = new File(rutaArchivo); // data/profesores.txt
+        rutaArchivo = String.format("datos/%s",
+                obtenerNombreArchivo());
+
+        File f = new File(rutaArchivo);
         if (f.exists()) {
             try {
                 entrada = new Scanner(new File(rutaArchivo));
-                // entrada = new Scanner(System.in);
                 // entrada = new Scanner(f);
             } // fin de try
             catch (FileNotFoundException e) {
@@ -46,8 +36,8 @@ public class LecturaArc {
     }
 
     public void establecerRutaArchivo() {
-        rutaArchivo = String.format("data/%s.txt",
-                obtenerNombreArchivo());;
+        rutaArchivo = String.format("datos/%s",
+                obtenerNombreArchivo());
     }
 
     public String obtenerNombreArchivo() {
@@ -62,26 +52,28 @@ public class LecturaArc {
     // en la lista de tipo Profesor
     public void establecerLista() {
         lista = new ArrayList<>();
+
         File f = new File(rutaArchivo);
 
         if (f.exists()) {
 
             while (entrada.hasNext()) {
-                String linea = entrada.nextLine(); // Tara Hernandez;contratado
+                String linea = entrada.nextLine();
 
-                ArrayList<String> linea_partes = new ArrayList<>(
-                        Arrays.asList(linea.split(";")) // ["Tara Hernandez", "contratado"]
+                ArrayList<String> lineaPartes = new ArrayList<>(
+                        Arrays.asList(linea.split(";"))
                 );
-                Profesor p = new Profesor(linea_partes.get(0), // Tara Hernandez
-                        linea_partes.get(1) // contratado
-                );
-                lista.add(p);
+                
+                Usuario u = new Usuario(lineaPartes.get(1),
+                        lineaPartes.get(2));
+                
+                lista.add(u);
 
             } // fin de while
         }
     }
 
-    public ArrayList<Profesor> obtenerLista() {
+    public ArrayList<Usuario> obtenerLista() {
 
         return lista;
     }
@@ -93,20 +85,4 @@ public class LecturaArc {
 
     }
 
-    @Override
-    public String toString() {
-        String cadena = "Lista Profesores\n";
-        for (int i = 0; i < obtenerLista().size(); i++) {
-            Profesor profTemporal = obtenerLista().get(i); // Obj. Profesor
-            cadena = String.format("%s(%d) %s %s\n", cadena,
-                    i + 1,
-                    profTemporal.obtenerNombre(), // obtenerLista().get(i).obtenerNombre(),
-                    profTemporal.obtenerTipo());    // obtenerLista().get(i).obtenerTipo());
-        }
-        return cadena;
-    }
-    
-    
-    
-    
 }
