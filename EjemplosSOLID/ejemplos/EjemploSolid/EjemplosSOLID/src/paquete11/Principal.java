@@ -57,7 +57,7 @@ public class Principal {
                 gen03.establecerUser(user.getUser());
                 gen03.establecerUrl("https://zapr/?/");
                 gens.add(gen03);
-            } else if (user.getTipo().equals("Starplus")) {
+            } else if (user.getTipo().equals("Startplus")) {
                 APIStarPlus apiStarPlus = new APIStarPlus();
                 apiStarPlus.establecerApiKey("669355");
 
